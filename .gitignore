@@ -133,4 +133,4 @@ dmypy.json
 
 # Database
 *.postgresql
-.data
+/.data
