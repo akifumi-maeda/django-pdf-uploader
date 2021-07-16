@@ -1,0 +1,12 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h2>サイト趣旨</h2>
+    <p>このサイトはPDFファイルをアップロード・閲覧するためのものです。</p>
+    <br>
+    <h2>機能一覧</h2>
+    <ul>
+        <li><a href="{% url 'pdf_all' %}">PDFファイルの一覧を見る。</a></li>
+        <li><a href="{% url 'upload_pdf' %}">PDFファイルをアップロードする。</a></li>
+    </ul>
+{% endblock %}

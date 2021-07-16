@@ -1,0 +1,14 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h2>PDFファイル一覧</h2>
+    <br>
+
+    {% if pdfupload_list %}
+        {% for pdf in pdfupload_list %}
+            <p><a href="{% url 'pdf_detail' pdf.pk %}">{{ pdf.file_name }}</a> - 追加日: {{ pdf.upload_date }}</p>
+        {% endfor %}
+    {% else %}
+        <p>アップロードされたファイルはありません。</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <div class="col-6 offset-3">
+        <div class="card text-center">
+            <div class="card-header">
+                PDFファイルをアップロードする
+            </div>
+            <div class = "card-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- <div class="input-group my-4"> -->
+                        {{ form.upload }}
+                        <button class="btn btn-outline-secondary file-input-button" type="submit">アップロード</button>
+                    <!-- </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src="{% static 'js/pdfUploadForm.js' %}"></script>
+{% endblock %}

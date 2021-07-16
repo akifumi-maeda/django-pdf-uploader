@@ -1,0 +1,12 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>PDFファイルを削除</h1>
+
+    <p>PDFファイル: <a href="{{ pdfupload.upload.url }}">{{ pdfupload.file_name }}</a>を本当に削除しますか？</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="削除">
+    </form>
+{% endblock %}

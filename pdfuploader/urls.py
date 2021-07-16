@@ -14,8 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('app/', include('app.urls')),
+]
+
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='/app/')),
+]
+
+# Use static() to add url mapping to serve static and media files during development (only)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Add login page url
+
+from . import views
+
+urlpatterns += [
+    path('accounts/login/', views.MyLoginView.as_view(), name='login'),
+    path('accounts/logout/', views.MyLogoutView.as_view(), name='logout'),
 ]

@@ -1,0 +1,18 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <div class="card text-center col-6  mx-auto mt-5 bg-light">
+        <div class="card-header">
+            ファイル詳細
+        </div>
+        <div class="card-body">
+            <p><a href="{{ pdfupload.upload.url }}">{{ pdfupload.upload.name }}</a></p>
+            <p>追加日: {{ pdfupload.upload_date }}</p>
+            <hr>
+            <div class="mt-4 d-flex justify-content-evenly">
+                <a class="btn btn-primary" role="button" href="{% url 'update_pdf' pdfupload.pk %}">アップデート</a>
+                <a class="btn btn-danger" role="button" href="{% url 'delete_pdf' pdfupload.pk %}">削除</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
