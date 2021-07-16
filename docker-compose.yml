@@ -9,6 +9,8 @@ services:
             - POSTGRES_DB=django_pdfuploader_db
             - POSTGRES_USER=django_pdfuploader_user
             - POSTGRES_PASSWORD=djangopdfuploader
+        ports:
+            - "5432"
     web:
         build: .
         command: python manage.py runserver 0.0.0.0:8000
