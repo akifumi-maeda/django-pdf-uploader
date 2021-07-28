@@ -1,12 +1,51 @@
 {% extends 'base_generic.html' %}
 
+{% block active_all %}active{% endblock %}
+
 {% block content %}
-    <h2>PDFファイル一覧</h2>
+    <div class="d-flex justify-content-between">
+        <h2>PDFファイル一覧</h2>
+        <form action="" method="get">
+            <div class="input-group">
+                <input type="search" class="form-control" name="query" placeholder="検索する" {% if query_value %}value="{{ query_value }}"{% endif %}>
+                <button type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-8 offset-sm-4 col-md-6 offset-md-6">
+            <form action="" method="get">
+                <div class="input-group">
+                    {{ query_date_form.date }}
+                    <button type="submit" class="btn btn-dark">絞り込む</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-8 offset-sm-4 col-md-6 offset-md-6">
+            <form action="" method="get">
+                {{ query_date_period_form.non_field_errors }}
+                {% for field in query_date_period_form %}
+                    <!-- {{ field.errors }} -->
+                    <dl>
+                        <dt>{{ field.label_tag }}</dt>
+                        <dd>
+                            <div class="input-group">{{ field }}</div>
+                        </dd>
+                    </dl>
+                {% endfor %}
+                <button type="submit" class="btn btn-dark">絞り込む</button>
+            </form>
+        </div>
+    </div>
     <br>
 
     {% if pdfupload_list %}
         {% for pdf in pdfupload_list %}
-            <p><a href="{% url 'pdf_detail' pdf.pk %}">{{ pdf.file_name }}</a> - 追加日: {{ pdf.upload_date }}</p>
+            <p><a href="{{ pdf.get_absolute_url }}">{{ pdf.file_name }}</a> - 追加日: {{ pdf.upload_date }}</p>
         {% endfor %}
     {% else %}
         <p>アップロードされたファイルはありません。</p>
