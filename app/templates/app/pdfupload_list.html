@@ -3,51 +3,61 @@
 {% block active_all %}active{% endblock %}
 
 {% block content %}
-    <div class="d-flex justify-content-between">
+    <div class="d-sm-flex justify-content-between">
         <h2>PDFファイル一覧</h2>
-        <form action="" method="get">
-            <div class="input-group">
-                <input type="search" class="form-control" name="query" placeholder="検索する" {% if query_value %}value="{{ query_value }}"{% endif %}>
-                <button type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-8 offset-sm-4 col-md-6 offset-md-6">
+        <div class="d-sm-flex align-items-center">
+            <a class="btn btn-outline-dark me-3" data-bs-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
+                <i class="fas fa-filter"></i>
+            </a>
             <form action="" method="get">
                 <div class="input-group">
-                    {{ query_date_form.date }}
-                    <button type="submit" class="btn btn-dark">絞り込む</button>
+                    <input type="search" class="form-control" name="query" placeholder="検索する" {% if query_value %}value="{{ query_value }}"{% endif %}>
+                    <button type="submit" class="btn btn-outline-dark">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-sm-8 offset-sm-4 col-md-6 offset-md-6">
-            <form action="" method="get">
-                {{ query_date_period_form.non_field_errors }}
-                {% for field in query_date_period_form %}
-                    <!-- {{ field.errors }} -->
-                    <dl>
-                        <dt>{{ field.label_tag }}</dt>
-                        <dd>
-                            <div class="input-group">{{ field }}</div>
-                        </dd>
-                    </dl>
-                {% endfor %}
-                <button type="submit" class="btn btn-dark">絞り込む</button>
-            </form>
+
+    <div class="collapse" id="collapseFilter">
+        <div class="row mt-3">
+            <div class="col-sm-8 offset-sm-4 col-md-6 offset-md-6">
+                <form action="" method="get">
+                    <div class="input-group">
+                        {{ query_date_form.date }}
+                        <button type="submit" class="btn btn-dark">絞り込む</button>
+                    </div>
+                </form>
+            </div>
         </div>
+        <div class="row mt-3">
+            <div class="col-sm-8 offset-sm-4 col-md-6 offset-md-6">
+                <form action="" method="get">
+                    {{ query_date_period_form.non_field_errors }}
+                    {% for field in query_date_period_form %}
+                        <!-- {{ field.errors }} -->
+                        <dl>
+                            <dt>{{ field.label_tag }}</dt>
+                            <dd>
+                                <div class="input-group">{{ field }}</div>
+                            </dd>
+                        </dl>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-dark">絞り込む</button>
+                </form>
+            </div>
+        </div>
+        <br>
     </div>
-    <br>
 
     {% if pdfupload_list %}
         {% for pdf in pdfupload_list %}
-            <p><a href="{{ pdf.get_absolute_url }}">{{ pdf.file_name }}</a> - 追加日: {{ pdf.upload_date }}</p>
+            <p class="mt-4">
+                <a href="{{ pdf.get_absolute_url }}">{{ pdf.file_name }}</a> - 追加日: {{ pdf.upload_date }}
+            </p>
         {% endfor %}
     {% else %}
-        <p>アップロードされたファイルはありません。</p>
+        <p class="mt-4">アップロードされたファイルはありません。</p>
     {% endif %}
 {% endblock %}

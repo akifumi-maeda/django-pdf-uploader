@@ -6,9 +6,12 @@
     <h2>サイト趣旨</h2>
     <p>このサイトはPDFファイルをアップロード・閲覧するためのものです。</p>
     <br>
-    <h2>機能一覧</h2>
-    <ul>
-        <li><a href="{% url 'pdf_all' %}">PDFファイルの一覧を見る。</a></li>
-        <li><a href="{% url 'upload_pdf' %}">PDFファイルをアップロードする。</a></li>
-    </ul>
+
+    <div class="row">
+        <h2>機能一覧</h2>
+        <div class="list-group col-auto ms-2 mt-3">
+            <a class="list-group-item list-group-item-action" href="{% url 'pdf_all' %}">PDFファイルの一覧を見る。</a>
+            <a class="list-group-item list-group-item-action" href="{% url 'upload_pdf' %}">PDFファイルをアップロードする。</a>
+        </div>
+    </div>
 {% endblock %}

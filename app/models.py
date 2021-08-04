@@ -10,7 +10,6 @@ class PdfUpload(models.Model):
         upload_to='uploads/%Y/%m/%d',
         verbose_name='添付ファイル',
         validators=[FileExtensionValidator(['pdf',])],
-        null=True
     )
     upload_date = models.DateField(auto_now=True)
 

@@ -9,14 +9,21 @@
                 PDFファイルをアップロードする
             </div>
             <div class = "card-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form class="needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
+                    {{ form.upload.errors }}
                     <!-- <div class="input-group my-4"> -->
                         {{ form.upload }}
                         <button class="btn btn-outline-secondary file-input-button" type="submit">アップロード</button>
+                        <div class="invalid-feedback">
+                            ファイルが選択されていません。
+                        </div>
                     <!-- </div> -->
                 </form>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-outline-secondary" href="{{request.META.HTTP_REFERER}}" role="button">キャンセル</a>
             </div>
         </div>
     </div>
@@ -25,4 +32,5 @@
 {% block js %}
     {% load static %}
     <script src="{% static 'js/pdfUploadForm.js' %}"></script>
+    <script src="{% static 'js/formValidation.js' %}"></script>
 {% endblock %}
